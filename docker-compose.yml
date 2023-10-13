@@ -13,6 +13,8 @@ services:
       - ./:/home/app
       - /home/app/node_modules
       - api-logs:/home/app/logs:rw
+    env_file:
+      - .env
     depends_on:
       - pgsql
     command: >
@@ -25,7 +27,9 @@ services:
     ports:
       - 5432:5432
     container_name: pgsql
-    restart: always 
+    restart: always
+    env_file:
+      - .env    
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
