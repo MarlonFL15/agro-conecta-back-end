@@ -1,0 +1,40 @@
+version: '0.0.1'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    container_name: api
+    restart: always
+    volumes:
+      - ./:/home/app
+      - /home/app/node_modules
+      - api-logs:/home/app/logs:rw
+    depends_on:
+      - pgsql
+    command: >
+      bash -c "
+      npm run build &&
+      npm run start:dev"
+
+  pgsql:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    container_name: pgsql
+    restart: always 
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      TZ: 'GMT+4'
+      PGTZ: 'GMT+4'
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+      PG_DATA: /var/lib/postgresql/data
+volumes:
+  api-logs:
+  pg-data:
