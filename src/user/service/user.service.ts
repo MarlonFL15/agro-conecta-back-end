@@ -24,4 +24,8 @@ export class UserService {
 
     return this.userRepository.save(user);
   }
+
+  async getAllUsers(): Promise<User[]> {
+    return this.userRepository.find();
+  }
 }
