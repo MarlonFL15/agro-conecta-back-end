@@ -27,7 +27,7 @@ export class User {
   @Column({ select: false })
   password: string;
 
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'varchar', select: false })
   password_hash: string;
 
   @Column()
