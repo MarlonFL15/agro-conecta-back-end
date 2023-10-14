@@ -48,4 +48,21 @@ export class User {
 
   @DeleteDateColumn({ type: 'timestamp' })
   deleted_at: Date;
+
+  constructor(user: {
+    name: string;
+    email: string;
+    phone: string;
+    password: string;
+    role: UserRole;
+  }) {
+    if (user) {
+      this.name = user.name;
+      this.email = user.email;
+      this.phone = user.phone;
+      this.role = user.role;
+      this.password = user.password;
+      this.password_hash = '';
+    }
+  }
 }
