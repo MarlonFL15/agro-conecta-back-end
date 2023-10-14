@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsOptional, IsEnum } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRole } from '../entity/user.entity';
 
-export class UserDTO {
+export class CreateUserDTO {
   @IsNotEmpty()
   @ApiProperty({ description: "The user's name" })
   name: string;
